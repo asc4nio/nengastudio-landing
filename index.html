@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NENGA STUDIO</title>
+  </head>
+  <body>
+    <div id="app">
+      <div id="threejs-container"></div>
+      <div id="about-trigger">
+        <button id="about-trigger-button">ABOUT US</button>
+      </div>
+      <div id="controls">
+        <div class="control-group">
+          <button class="decal is--active" id="decal0">
+            <img src="./brushes-ui-icons/brush01.png" />
+          </button>
+          <button class="decal" id="decal1">
+            <img src="./brushes-ui-icons/brush02.png" />
+          </button>
+          <button class="decal" id="decal2">
+            <img src="./brushes-ui-icons/brush03.png" />
+          </button>
+        </div>
+
+        <div class="control-group">
+          <button class="color is--active" id="color0"></button>
+          <button class="color" id="color1"></button>
+          <button class="color" id="color2"></button>
+          <button class="color" id="color3"></button>
+          <button class="color" id="color4"></button>
+        </div>
+
+        <div class="control-group">
+          <button id="save-button">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="24px"
+              viewBox="0 0 24 24"
+              width="24px"
+              fill="#000000"
+            >
+              <path d="M0 0h24v24H0V0z" fill="none" />
+              <path
+                d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2v9.67z"
+              />
+            </svg>
+          </button>
+          <button id="clear-button">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="24px"
+              viewBox="0 0 24 24"
+              width="24px"
+              fill="#000000"
+            >
+              <path d="M0 0h24v24H0V0z" fill="none" />
+              <path
+                d="M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1zM18 7H6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7z"
+              />
+            </svg>
+          </button>
+          <button id="undo-button">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="48"
+              viewBox="0 -960 960 960"
+              width="48"
+            >
+              <path
+                d="M280-200v-60h289q70 0 120.5-46.5T740-422q0-69-50.5-115.5T569-584H274l114 114-42 42-186-186 186-186 42 42-114 114h294q95 0 163.5 64T800-422q0 94-68.5 158T568-200H280Z"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="about" class="is--away"></div>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
