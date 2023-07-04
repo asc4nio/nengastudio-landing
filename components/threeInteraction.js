@@ -23,6 +23,7 @@ export function setInteraction(
   renderTargetRatio,
   loader
 ) {
+  console.debug("setInteraction()");
   const raycaster = new THREE.Raycaster();
 
   const plane = createPlane(loader, renderTargetRatio);
@@ -42,7 +43,7 @@ export function setInteraction(
   /************************************************************************************** */
 
   function checkIntersection(x, y, mesh) {
-    console.debug("checkIntersection", x, y);
+    // console.debug("checkIntersection", x, y);
 
     if (mesh === undefined) return;
 
@@ -53,7 +54,7 @@ export function setInteraction(
     raycaster.intersectObject(mesh, false, intersects);
 
     if (intersects.length > 0) {
-      console.debug(intersects);
+      // console.debug(intersects);
 
       const p = intersects[0].point;
       intersection.point.copy(p);
@@ -72,6 +73,8 @@ export function setInteraction(
   }
 
   function shoot(scene, target, intersection) {
+    console.debug("shoot()", intersection.point);
+
     //set direction
     let direction = new THREE.Vector3();
     direction.subVectors(pointerState.lastDecalPos, intersection.point);
@@ -98,7 +101,7 @@ export function setInteraction(
    */
 
   renderTarget.addEventListener("pointerdown", function (event) {
-    // console.debug("pointerdown");
+    console.debug("pointerdown");
 
     pointerState.isPointerDown = true;
     pointerState.dragStartPos.x = event.pageX;
@@ -127,8 +130,6 @@ export function setInteraction(
         checkIntersection(event.clientX, event.clientY, plane.mesh);
         if (intersection.intersects) {
           shoot(scene, plane.mesh, intersection);
-          console.log(decals.decals);
-          console.log(scene);
         }
 
         pointerState.dragStartPos.x = event.pageX;
@@ -140,7 +141,7 @@ export function setInteraction(
   });
 
   renderTarget.addEventListener("pointerup", function (event) {
-    // console.debug("pointerup");
+    console.debug("pointerup");
     pointerState.isPointerDown = false;
     pointerState.lastDecalPos = undefined;
   });

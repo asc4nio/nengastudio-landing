@@ -5,8 +5,35 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NENGA STUDIO</title>
+    <style>
+      #loading-overlay {
+        position: fixed;
+        z-index: 9999;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+
+        /* display: flex;
+        align-items: center;
+        justify-content: center; */
+
+        color: white;
+        background-color: black;
+
+        opacity: 1;
+        transition: opacity 1s ease;
+      }
+
+      #loading-overlay.is--away {
+        opacity: 0;
+        pointer-events: none;
+      }
+    </style>
   </head>
   <body>
+    <div id="loading-overlay">Loading...</div>
+
     <div id="app">
       <div id="threejs-container"></div>
       <div id="about-trigger">

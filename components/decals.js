@@ -13,6 +13,7 @@ import decal03diffuseURL from "/brush03-diffuse.png?url";
 import decal03normalURL from "/brush03-normal.jpg?url";
 
 export function setDecals(scene, loader) {
+  console.debug("setDecals()");
   let decals = [];
   let decalsMaterials = loadDecalsMaterial(loader);
 
@@ -39,6 +40,7 @@ export function setDecals(scene, loader) {
   }
 
   function clearDecals() {
+    console.debug("clearDecals()");
     decals.forEach(function (d) {
       scene.remove(d);
     });
@@ -46,6 +48,8 @@ export function setDecals(scene, loader) {
   }
 
   function removeLastDecal() {
+    console.debug("removeLastDecal()");
+
     scene.remove(decals[decals.length - 1]);
     decals.pop();
   }
@@ -59,6 +63,8 @@ export function setDecals(scene, loader) {
 }
 
 const loadDecalsMaterial = (loader) => {
+  console.debug("loadDecalsMaterial()");
+
   let decalsMaterials = [];
 
   let decalsTextures = [

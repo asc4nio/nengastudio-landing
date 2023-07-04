@@ -79,25 +79,25 @@ export function createScene() {
           " files."
       );
 
-      // let loadingDiv = document.getElementById("loading-overlay");
-      // loadingDiv.innerText =
-      //   "Loading file: " +
-      //   url +
-      //   ".\nLoaded " +
-      //   itemsLoaded +
-      //   " of " +
-      //   itemsTotal +
-      //   " files.";
+      let loadingDiv = document.getElementById("loading-overlay");
+      loadingDiv.innerText =
+        "Loading file: " +
+        url +
+        ".\nLoaded " +
+        itemsLoaded +
+        " of " +
+        itemsTotal +
+        " files.";
     };
     manager.onLoad = function () {
       console.debug("Loading complete!");
 
-      // let loadingDiv = document.getElementById("loading-overlay");
-      // loadingDiv.innerText = "Loading complete";
-      // loadingDiv.classList = "is--away";
-      // setTimeout(() => {
-      //   loadingDiv.remove();
-      // }, 1000);
+      let loadingDiv = document.getElementById("loading-overlay");
+      loadingDiv.innerText = "Loading complete";
+      loadingDiv.classList = "is--away";
+      setTimeout(() => {
+        loadingDiv.remove();
+      }, 1000);
     };
     manager.onError = function (url) {
       console.debug("There was an error loading " + url);

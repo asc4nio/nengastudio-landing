@@ -11,6 +11,7 @@ import denimRoughnessURL from "/denim02-roughness.jpg?url";
 import logoTextureURL from "/logo-overlay.png?url";
 
 export function createPlane(loader, renderTargetRatio) {
+  console.debug("createPlane()");
   const denimMaterial = loadDenimMaterial(loader, renderTargetRatio);
 
   const planeGeometry = new THREE.PlaneGeometry(1 * renderTargetRatio, 1);
@@ -43,6 +44,8 @@ export function createPlane(loader, renderTargetRatio) {
 }
 
 const loadDenimMaterial = (loader, renderTargetRatio) => {
+  console.debug("loadDenimMaterial()");
+
   const denimTextureScale = CONFIG.denim.textureScale;
 
   const denimDiffuseTexture = loader.load(denimDiffuseURL);
@@ -98,6 +101,8 @@ const loadDenimMaterial = (loader, renderTargetRatio) => {
 };
 
 const loadLogoMaterial = (loader) => {
+  console.debug("loadLogoMaterial()");
+
   const logoTexture = loader.load(logoTextureURL);
 
   const logoMaterial = new THREE.MeshPhongMaterial({
