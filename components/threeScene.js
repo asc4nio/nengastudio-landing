@@ -126,8 +126,6 @@ export function createScene() {
     scene,
     camera,
     renderTarget,
-    renderTargetRatio,
-    loader,
     plane,
     decals
   );

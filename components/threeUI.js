@@ -1,12 +1,16 @@
 import { CONFIG } from "./threeConfig.js";
 
-export function setDomControls(renderer, decals) {
+export function setDomControls(decals) {
   /**
    * clear button
    */
   document.getElementById("clear-button").addEventListener("click", () => {
     console.debug("clear-button");
-    decals.clearDecals();
+    if (confirm("Clear canvas?") == true) {
+      decals.clearDecals();
+    } else {
+      return;
+    }
   });
 
   /**
@@ -76,7 +80,7 @@ export function setDomControls(renderer, decals) {
   });
 }
 
-export function toggleControlsVisibility(action) {
+export function setControlsVisibility(action) {
   const controls = document.getElementById("controls");
 
   switch (action) {

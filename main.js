@@ -1,7 +1,7 @@
 import "./style.css";
 
 import { createScene } from "./components/threeScene";
-import { toggleControlsVisibility } from "./components/threeUI.js";
+import { setControlsVisibility } from "./components/threeUI.js";
 
 /************************************************************************** */
 
@@ -25,13 +25,13 @@ var page = {
       .addEventListener("click", () => {
         document.getElementById("about").classList = "";
 
-        toggleControlsVisibility(true);
+        setControlsVisibility(true);
       });
 
     document
       .getElementById("about-close-button")
       .addEventListener("click", () => {
-        toggleControlsVisibility(false);
+        setControlsVisibility(false);
 
         document.getElementById("about").classList = "is--away";
       });
@@ -50,4 +50,8 @@ window.onload = function (event) {
 
   page.initThree();
   page.initInteractions();
+
+  // setTimeout(() => {
+  //   alert("should ask for c2a");
+  // }, 12 * 1000);
 };

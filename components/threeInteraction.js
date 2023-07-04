@@ -2,10 +2,7 @@ import { CONFIG } from "./threeConfig.js";
 
 import * as THREE from "three";
 
-// import { setDecals } from "./decals.js";
-// import { createPlane } from "./denim.js";
-
-import { toggleControlsVisibility } from "./threeUI.js";
+import { setControlsVisibility } from "./threeUI.js";
 
 /****************************************************************** */
 
@@ -18,20 +15,9 @@ window.pointerState = {
 
 /****************************************************************** */
 
-export function setInteraction(
-  scene,
-  camera,
-  renderTarget,
-  renderTargetRatio,
-  loader,
-  plane,
-  decals
-) {
+export function setInteraction(scene, camera, renderTarget, plane, decals) {
   console.debug("setInteraction()");
   const raycaster = new THREE.Raycaster();
-
-  // const plane = createPlane(loader, renderTargetRatio);
-  // const decals = setDecals(scene, loader);
 
   /**
    * Set pointer
@@ -115,7 +101,7 @@ export function setInteraction(
   renderTarget.addEventListener("pointermove", (event) => {
     // console.debug("pointermove");
 
-    toggleControlsVisibility(pointerState.isShooting);
+    setControlsVisibility(pointerState.isShooting);
 
     if (pointerState.isPointerDown && event.isPrimary) {
       if (pointerState.lastDecalPos === undefined) {
@@ -153,7 +139,7 @@ export function setInteraction(
     pointerState.lastDecalPos = undefined;
     pointerState.isShooting = false;
 
-    toggleControlsVisibility(pointerState.isShooting);
+    setControlsVisibility(pointerState.isShooting);
   });
 
   /************************************************************************************** */
