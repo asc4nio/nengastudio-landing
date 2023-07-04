@@ -1,3 +1,5 @@
+import { CONFIG } from "./threeConfig.js";
+
 import * as THREE from "three";
 import { DecalGeometry } from "three/addons/geometries/DecalGeometry.js";
 
@@ -6,23 +8,25 @@ import denimNormalURL from "/denim02-normal.jpg?url";
 import denimBumpURL from "/denim02-bump.jpg?url";
 import denimRoughnessURL from "/denim02-roughness.jpg?url";
 
+import logoTextureURL from "/logo-overlay.png?url";
+
 export function createPlane(loader, renderTargetRatio) {
   const denimMaterial = loadDenimMaterial(loader, renderTargetRatio);
 
   const planeGeometry = new THREE.PlaneGeometry(1 * renderTargetRatio, 1);
-  const planeMaterial = new THREE.MeshBasicMaterial({
-    color: 0x0000ff,
-    side: THREE.DoubleSide,
-  });
+  // const planeMaterial = new THREE.MeshBasicMaterial({
+  //   color: 0x0000ff,
+  //   side: THREE.DoubleSide,
+  // });
   const mesh = new THREE.Mesh(planeGeometry, denimMaterial);
-  // plane.scale.set(0.9, 0.9, 1);
-  // scene.add(plane);
 
-  // const setLogo = (() => {
-
+  /**
+   * Set logo decal
+   */
   const orientation = new THREE.Euler(0, 0, 0);
   const position = new THREE.Vector3();
-  let scale = 0.5;
+
+  let scale = CONFIG.denim.logoScale;
   const size = new THREE.Vector3(scale, scale, 1);
 
   const material = loadLogoMaterial(loader);
@@ -32,9 +36,6 @@ export function createPlane(loader, renderTargetRatio) {
     material
   );
 
-  // scene.add(logoDecal);
-  // })();
-
   return {
     mesh,
     logoDecal,
@@ -42,25 +43,7 @@ export function createPlane(loader, renderTargetRatio) {
 }
 
 const loadDenimMaterial = (loader, renderTargetRatio) => {
-  //   let denimTextures = {
-  //     diffuseURL:
-  //       "https://asc4nio.github.io/nengastudio/prototype-dev/dist/denim02-diffuse.jpg",
-  //     normalURL:
-  //       "https://asc4nio.github.io/nengastudio/prototype-dev/dist/denim02-normal.jpg",
-  //     bumpURL:
-  //       "https://asc4nio.github.io/nengastudio/prototype-dev/dist/denim02-bump.jpg",
-  //     roughnessURL:
-  //       "https://asc4nio.github.io/nengastudio/prototype-dev/dist/denim02-roughness.jpg",
-  //   };
-
-  //   let denimTextures = {
-  //     diffuseURL: denimDiffuseURL,
-  //     normalURL: denimNormalURL,
-  //     bumpURL: denimBumpURL,
-  //     roughnessURL: denimRoughnessURL,
-  //   };
-
-  const denimTextureScale = threeState.denimTextureScale;
+  const denimTextureScale = CONFIG.denim.textureScale;
 
   const denimDiffuseTexture = loader.load(denimDiffuseURL);
   denimDiffuseTexture.wrapS = THREE.RepeatWrapping;
@@ -115,12 +98,7 @@ const loadDenimMaterial = (loader, renderTargetRatio) => {
 };
 
 const loadLogoMaterial = (loader) => {
-  let logoTextureURL =
-    "https://asc4nio.github.io/nengastudio/prototype-dev/dist/logo-overlay.png";
   const logoTexture = loader.load(logoTextureURL);
-  // logoTexture.colorSpace = THREE.SRGBColorSpace;
-  // logoTexture.colorSpace = THREE.NoColorSpace
-  // logoTexture.colorSpace = THREE.LinearSRGBColorSpace
 
   const logoMaterial = new THREE.MeshPhongMaterial({
     map: logoTexture,
@@ -130,7 +108,7 @@ const loadLogoMaterial = (loader) => {
     blendEquation: THREE.AddEquation,
     blendEquationAlpha: THREE.MaxEquation,
 
-    opacity: 0.1,
+    opacity: CONFIG.denim.logoAlpha,
   });
 
   return logoMaterial;

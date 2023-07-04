@@ -1,42 +1,15 @@
 import * as THREE from "three";
-import { createCamera } from "./threeCamera.js";
 
+// import { CONFIG } from "./threeConfig.js";
+
+import { createCamera } from "./threeCamera.js";
 import { setInteraction } from "./threeInteraction.js";
 import { setDomControls } from "./threeUI.js";
 
 window.threeState = {
-  denimTextureScale: 2,
-  decalsScale: undefined,
-  shootRadius: 20,
-  currentDecalColor: 0,
-  currentDecalMaterial: 0,
+  currentDecal: 0,
+  currentColor: 0,
 };
-
-window.decalsColors = [
-  new THREE.Color(0xffe715),
-  new THREE.Color(0xa1c23d),
-  new THREE.Color(0x008c45),
-  new THREE.Color(0x19548e),
-  new THREE.Color(0x25262a),
-];
-
-window.threeDecalsParams = [
-  {
-    id: 0,
-    decalsScale: 0.03,
-    shootRadius: window.innerHeight / 56,
-  },
-  {
-    id: 1,
-    decalsScale: 0.03,
-    shootRadius: window.innerHeight / 72,
-  },
-  {
-    id: 2,
-    decalsScale: 0.03,
-    shootRadius: window.innerHeight / 72,
-  },
-];
 
 export function createScene() {
   console.debug("createScene()");
@@ -76,7 +49,7 @@ export function createScene() {
     const light = new THREE.PointLight(0xffffff, 1, 6.66);
     light.position.set(0, 0.5, 2);
     scene.add(light);
-    console.log(light);
+    // console.log(light);
   })();
 
   /**

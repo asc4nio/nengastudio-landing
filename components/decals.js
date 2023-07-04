@@ -1,3 +1,5 @@
+import { CONFIG } from "./threeConfig.js";
+
 import * as THREE from "three";
 import { DecalGeometry } from "three/addons/geometries/DecalGeometry.js";
 
@@ -15,11 +17,19 @@ export function setDecals(scene, loader) {
   let decalsMaterials = loadDecalsMaterial(loader);
 
   function createDecal(target, orientation, position) {
-    // set current size
-    const size = new THREE.Vector3(0.05, 0.05, 1);
-    // set current material
-    const material = decalsMaterials[threeState.currentDecalMaterial].clone();
-    material.color = window.decalsColors[threeState.currentDecalColor];
+    /**
+     * set current size
+     */
+    const scale = CONFIG.decals[threeState.currentDecal].scale;
+    const size = new THREE.Vector3(scale, scale, 1);
+    /**
+     * set current material
+     */
+    const material = decalsMaterials[threeState.currentDecal].clone();
+    /**
+     * set current color
+     */
+    material.color = new THREE.Color(CONFIG.palette[threeState.currentColor]);
 
     const mesh = new THREE.Mesh(
       new DecalGeometry(target, position, orientation, size),

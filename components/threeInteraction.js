@@ -1,13 +1,19 @@
+import { CONFIG } from "./threeConfig.js";
+
 import * as THREE from "three";
 
 import { setDecals } from "./decals.js";
 import { createPlane } from "./denim.js";
+
+/****************************************************************** */
 
 window.pointerState = {
   isPointerDown: false,
   dragStartPos: new THREE.Vector2(),
   lastDecalPos: undefined,
 };
+
+/****************************************************************** */
 
 export function setInteraction(
   scene,
@@ -110,7 +116,13 @@ export function setInteraction(
       let diffX = Math.abs(event.pageX - pointerState.dragStartPos.x);
       let diffY = Math.abs(event.pageY - pointerState.dragStartPos.y);
 
-      if (diffX > threeState.shootRadius || diffY > threeState.shootRadius) {
+      /**
+       * set current shoot radius
+       */
+      let currentShootRadius =
+        CONFIG.decals[threeState.currentDecal].shootRadius();
+
+      if (diffX > currentShootRadius || diffY > currentShootRadius) {
         // console.debug("pointermove", diffX, diffY);
         checkIntersection(event.clientX, event.clientY, plane.mesh);
         if (intersection.intersects) {
