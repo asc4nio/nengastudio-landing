@@ -141,11 +141,4 @@ export function setInteraction(scene, camera, renderTarget, plane, decals) {
 
     setControlsVisibility(pointerState.isShooting);
   });
-
-  /************************************************************************************** */
-
-  return {
-    plane,
-    decals,
-  };
 }

@@ -13,7 +13,7 @@ import { setDomControls } from "./threeUI.js";
 export function createScene() {
   console.debug("createScene()");
 
-  const clock = new THREE.Clock();
+  // const clock = new THREE.Clock();
 
   /**
    * Set scene, camera, render
@@ -120,19 +120,17 @@ export function createScene() {
    */
 
   const plane = createPlane(loader, renderTargetRatio);
+  scene.add(plane.mesh);
+  scene.add(plane.logoDecal);
+
   const decals = setDecals(scene, loader);
 
-  const interaction = setInteraction(
-    scene,
-    camera,
-    renderTarget,
-    plane,
-    decals
-  );
-  scene.add(interaction.plane.mesh);
-  scene.add(interaction.plane.logoDecal);
+  setInteraction(scene, camera, renderTarget, plane, decals);
 
-  setDomControls(renderer, interaction.decals);
+  // scene.add(interaction.plane.mesh);
+  // scene.add(interaction.plane.logoDecal);
+
+  setDomControls(decals);
 
   /**
    * Loop

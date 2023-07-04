@@ -6,6 +6,7 @@ export function setDomControls(decals) {
    */
   document.getElementById("clear-button").addEventListener("click", () => {
     console.debug("clear-button");
+
     if (confirm("Clear canvas?") == true) {
       decals.clearDecals();
     } else {

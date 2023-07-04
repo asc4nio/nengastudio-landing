@@ -5,6 +5,10 @@ import { setControlsVisibility } from "./components/threeUI.js";
 
 /************************************************************************** */
 
+window.siteState = {
+  isAbout: false,
+};
+
 window.threeState = {
   currentDecal: 0,
   currentColor: 0,
@@ -23,23 +27,38 @@ var page = {
     document
       .getElementById("about-trigger-button")
       .addEventListener("click", () => {
-        document.getElementById("about").classList = "";
-
-        setControlsVisibility(true);
+        page.toggleAbout(true);
       });
 
     document
       .getElementById("about-close-button")
       .addEventListener("click", () => {
-        setControlsVisibility(false);
-
-        document.getElementById("about").classList = "is--away";
+        page.toggleAbout(false);
       });
   },
   initThree: () => {
     window.scene = createScene();
     window.scene.start();
     window.addEventListener("resize", window.scene.onResize, false);
+  },
+  toggleAbout: (command) => {
+    switch (command) {
+      case true:
+        document.getElementById("about").classList = "";
+        siteState.isAbout = true;
+        window.scene.stop();
+        setControlsVisibility(true);
+        break;
+      case false:
+        setControlsVisibility(false);
+        siteState.isAbout = false;
+        window.scene.start();
+        document.getElementById("about").classList = "is--away";
+        break;
+
+      default:
+        break;
+    }
   },
 };
 
