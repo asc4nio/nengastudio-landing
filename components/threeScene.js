@@ -6,11 +6,6 @@ import { createCamera } from "./threeCamera.js";
 import { setInteraction } from "./threeInteraction.js";
 import { setDomControls } from "./threeUI.js";
 
-window.threeState = {
-  currentDecal: 0,
-  currentColor: 0,
-};
-
 export function createScene() {
   console.debug("createScene()");
 
@@ -58,26 +53,35 @@ export function createScene() {
   const manager = new THREE.LoadingManager();
   const setManager = (() => {
     manager.onStart = function (url, itemsLoaded, itemsTotal) {
-      console.debug(
-        "Started loading file: " +
-          url +
-          ".\nLoaded " +
-          itemsLoaded +
-          " of " +
-          itemsTotal +
-          " files."
-      );
+      window.threeState.loading.isRunning = true;
+
+      // console.debug(
+      //   "Started loading file: " +
+      //     url +
+      //     ".\nLoaded " +
+      //     itemsLoaded +
+      //     " of " +
+      //     itemsTotal +
+      //     " files."
+      // );
     };
     manager.onProgress = function (url, itemsLoaded, itemsTotal) {
-      console.debug(
-        "Loading file: " +
-          url +
-          ".\nLoaded " +
-          itemsLoaded +
-          " of " +
-          itemsTotal +
-          " files."
-      );
+      window.threeState.loading.progress = itemsLoaded / itemsTotal;
+
+      let loadingPercentage =
+        Math.round(window.threeState.loading.progress * 1000) / 10;
+
+      console.debug(loadingPercentage, "% textureloader");
+
+      // console.debug(
+      //   "Loading file: " +
+      //     url +
+      //     ".\nLoaded " +
+      //     itemsLoaded +
+      //     " of " +
+      //     itemsTotal +
+      //     " files."
+      // );
 
       let loadingDiv = document.getElementById("loading-overlay");
       loadingDiv.innerText =
@@ -90,7 +94,9 @@ export function createScene() {
         " files.";
     };
     manager.onLoad = function () {
-      console.debug("Loading complete!");
+      window.threeState.loading.isRunning = false;
+
+      // console.debug("Loading complete!");
 
       let loadingDiv = document.getElementById("loading-overlay");
       loadingDiv.innerText = "Loading complete";

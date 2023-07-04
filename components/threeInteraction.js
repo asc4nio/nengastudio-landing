@@ -5,12 +5,15 @@ import * as THREE from "three";
 import { setDecals } from "./decals.js";
 import { createPlane } from "./denim.js";
 
+import { toggleControlsVisibility } from "./threeUI.js";
+
 /****************************************************************** */
 
 window.pointerState = {
   isPointerDown: false,
   dragStartPos: new THREE.Vector2(),
   lastDecalPos: undefined,
+  isShooting: false,
 };
 
 /****************************************************************** */
@@ -111,6 +114,8 @@ export function setInteraction(
   renderTarget.addEventListener("pointermove", (event) => {
     // console.debug("pointermove");
 
+    toggleControlsVisibility(pointerState.isShooting);
+
     if (pointerState.isPointerDown && event.isPrimary) {
       if (pointerState.lastDecalPos === undefined) {
         checkIntersection(event.clientX, event.clientY, plane.mesh);
@@ -129,6 +134,7 @@ export function setInteraction(
         // console.debug("pointermove", diffX, diffY);
         checkIntersection(event.clientX, event.clientY, plane.mesh);
         if (intersection.intersects) {
+          pointerState.isShooting = true;
           shoot(scene, plane.mesh, intersection);
         }
 
@@ -144,6 +150,9 @@ export function setInteraction(
     console.debug("pointerup");
     pointerState.isPointerDown = false;
     pointerState.lastDecalPos = undefined;
+    pointerState.isShooting = false;
+
+    toggleControlsVisibility(pointerState.isShooting);
   });
 
   /************************************************************************************** */

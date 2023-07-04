@@ -14,12 +14,10 @@
         bottom: 0;
         right: 0;
 
-        /* display: flex;
-        align-items: center;
-        justify-content: center; */
-
-        color: white;
-        background-color: black;
+        color: black;
+        background-color: white;
+        /* color: white;
+        background-color: black; */
 
         opacity: 1;
         transition: opacity 1s ease;
@@ -36,32 +34,38 @@
 
     <div id="app">
       <div id="threejs-container"></div>
-      <div id="about-trigger">
-        <button id="about-trigger-button">ABOUT US</button>
-      </div>
+
       <div id="controls">
+        <div id="about-trigger">
+          <button id="about-trigger-button">ABOUT US</button>
+        </div>
+
         <div class="control-group">
-          <button class="decal is--active" id="decal0" data-decal="0">
+          <button class="ui-button decal is--active" id="decal0" data-decal="0">
             <img src="./brushes-ui-icons/brush01.png" />
           </button>
-          <button class="decal" id="decal1" data-decal="1">
+          <button class="ui-button decal" id="decal1" data-decal="1">
             <img src="./brushes-ui-icons/brush02.png" />
           </button>
-          <button class="decal" id="decal2" data-decal="2">
+          <button class="ui-button decal" id="decal2" data-decal="2">
             <img src="./brushes-ui-icons/brush03.png" />
           </button>
         </div>
 
         <div class="control-group">
-          <button class="color is--active" id="color0" data-color="0"></button>
-          <button class="color" id="color1" data-color="1"></button>
-          <button class="color" id="color2" data-color="2"></button>
-          <button class="color" id="color3" data-color="3"></button>
-          <button class="color" id="color4" data-color="4"></button>
+          <button
+            class="ui-button color is--active"
+            id="color0"
+            data-color="0"
+          ></button>
+          <button class="ui-button color" id="color1" data-color="1"></button>
+          <button class="ui-button color" id="color2" data-color="2"></button>
+          <button class="ui-button color" id="color3" data-color="3"></button>
+          <button class="ui-button color" id="color4" data-color="4"></button>
         </div>
 
         <div class="control-group">
-          <button id="save-button">
+          <button id="save-button" class="ui-button">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               height="24px"
@@ -75,7 +79,7 @@
               />
             </svg>
           </button>
-          <button id="clear-button">
+          <button id="clear-button" class="ui-button">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               height="24px"
@@ -89,7 +93,7 @@
               />
             </svg>
           </button>
-          <button id="undo-button">
+          <button id="undo-button" class="ui-button">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               height="48"
@@ -104,7 +108,9 @@
         </div>
       </div>
     </div>
-    <div id="about" class="is--away"></div>
+    <div id="about" class="is--away">
+      <button id="about-close-button">X</button>
+    </div>
     <script type="module" src="/main.js"></script>
   </body>
 </html>

@@ -26,6 +26,6 @@ export const CONFIG = {
   ],
   palette: ["#ffe715", "#a1c23d", "#008c45", "#19548e", "#25262a"],
   ui: {
-    undoInterval: 200,
+    undoInterval: 200, //ms
   },
 };

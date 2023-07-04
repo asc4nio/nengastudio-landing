@@ -8,7 +8,7 @@ import denimNormalURL from "/denim02-normal.jpg?url";
 import denimBumpURL from "/denim02-bump.jpg?url";
 import denimRoughnessURL from "/denim02-roughness.jpg?url";
 
-import logoTextureURL from "/logo-overlay.png?url";
+import logoTextureURL from "/tex/logo-overlay.png?url";
 
 export function createPlane(loader, renderTargetRatio) {
   console.debug("createPlane()");

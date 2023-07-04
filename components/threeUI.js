@@ -76,6 +76,23 @@ export function setDomControls(renderer, decals) {
   });
 }
 
+export function toggleControlsVisibility(action) {
+  const controls = document.getElementById("controls");
+
+  switch (action) {
+    case true:
+      controls.classList = "is--faded";
+      break;
+    case false:
+      controls.classList = "";
+      break;
+
+    default:
+      console.error("error toggle ui visibility");
+      break;
+  }
+}
+
 /***************************************************************************** */
 /**
  * update dom
@@ -83,18 +100,18 @@ export function setDomControls(renderer, decals) {
 const updateDecalButtonClass = (_target) => {
   let decalsButtons = document.getElementsByClassName("decal");
   for (let button of decalsButtons) {
-    button.classList = "decal";
+    button.classList = "ui-button decal";
   }
   console.log(_target);
-  _target.classList = "decal is--active";
+  _target.classList = "ui-button decal is--active";
 };
 
 const updateColorButtonClass = (_target) => {
   let colorButtons = document.getElementsByClassName("color");
   for (let button of colorButtons) {
-    button.classList = "color";
+    button.classList = "ui-button color";
   }
-  _target.classList = "color is--active";
+  _target.classList = "ui-button color is--active";
 };
 
 /***************************************************************************** */

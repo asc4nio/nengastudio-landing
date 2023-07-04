@@ -1,6 +1,29 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  /* color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424; */
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
 html,
 body {
   height: 100%;
+
+  font-weight: 600;
+}
+
+canvas {
+  max-height: 100vh;
+  touch-action: none;
 }
 
 #app {
@@ -15,62 +38,9 @@ body {
   padding: 0;
 }
 
-button {
-  position: relative;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  /* font-size: 1em; */
-  border: none;
-  border-radius: 1em;
-
-  margin: 0.2em;
-  padding: 0;
-
-  width: 2em;
-  height: 2em;
-}
-button::after {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  top: 0;
-  left: 0;
-  width: 2em;
-  height: 2em;
-  background-color: rgb(255, 255, 255);
-  border-radius: 2em;
-  transform: scale(1.15);
-}
-
-button.is--active::after {
-  background-color: rgb(0, 0, 0);
-}
-
-button > img {
-  width: 1.5em;
-  height: 1.5em;
-  pointer-events: none;
-}
-button > svg {
-  width: 2em;
-  height: 2em;
-}
-
-#about-trigger {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: auto;
-  right: auto;
-  z-index: 2;
-
-  padding: 1em;
-}
-#about-trigger > button {
-}
+/**
+* scene ui
+*/
 
 #controls {
   position: absolute;
@@ -85,11 +55,69 @@ button > svg {
   justify-content: space-between;
 
   padding: 0.75em;
+
+  pointer-events: none;
+
+  transition-property: opacity;
+  transition-duration: 0.2s;
+  transition-timing-function: linear;
+  /* transition-delay: 1s; */
+}
+#controls.is--faded {
+  opacity: 0;
 }
 
 .control-group {
   display: flex;
   flex-direction: column;
+
+  pointer-events: auto;
+}
+
+.ui-button {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* font-size: 1em; */
+  font-weight: 600;
+  white-space: nowrap;
+
+  border: none;
+  border-radius: 1em;
+
+  margin: 0.2em;
+  padding: 0;
+
+  width: 2em;
+  height: 2em;
+}
+.ui-button::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 2em;
+  height: 2em;
+  background-color: rgb(255, 255, 255);
+  border-radius: 2em;
+  transform: scale(1.15);
+}
+.ui-button.is--active::after {
+  background-color: rgb(0, 0, 0);
+}
+
+.ui-button > img {
+  width: 1.5em;
+  height: 1.5em;
+  pointer-events: none;
+}
+.ui-button > svg {
+  width: 2em;
+  height: 2em;
 }
 
 #color0 {
@@ -113,8 +141,32 @@ button > svg {
   background-color: #25262a;
 }
 
+/**
+* about
+*/
+
+#about-trigger {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: auto;
+  right: auto;
+
+  z-index: 2;
+
+  pointer-events: auto;
+
+  padding: 1em;
+}
+#about-trigger > button {
+}
+
 #about {
   position: fixed;
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
 
   top: 0;
   left: 0;
@@ -123,11 +175,24 @@ button > svg {
 
   z-index: 10;
 
-  background-color: beige;
+  pointer-events: auto;
+
+  padding: 1em;
+
+  background-color: rgba(255, 255, 255, 0.5);
+
+  opacity: 1;
+
+  /* transition-property: transform;
+  transition-duration: 0.6s;
+  transition-timing-function: linear; */
+  /* transition-delay: 1s; */
 }
 
 #about.is--away {
-  transform: translate(-100%, 0%);
+  /* transform: translate(-100%, 0%); */
+  opacity: 0;
+  pointer-events: none;
 }
 
 /*
