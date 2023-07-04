@@ -3,6 +3,10 @@ import * as THREE from "three";
 // import { CONFIG } from "./threeConfig.js";
 
 import { createCamera } from "./threeCamera.js";
+
+import { setDecals } from "./decals.js";
+import { createPlane } from "./denim.js";
+
 import { setInteraction } from "./threeInteraction.js";
 import { setDomControls } from "./threeUI.js";
 
@@ -19,17 +23,17 @@ export function createScene() {
     renderTarget.offsetWidth / renderTarget.offsetHeight;
 
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x00ffff);
+  // scene.background = new THREE.Color(0x00ffff);
 
   const camera = createCamera(renderTarget);
 
-  const renderer = new THREE.WebGLRenderer();
+  const renderer = new THREE.WebGLRenderer({
+    antialias: true,
+    preserveDrawingBuffer: true,
+  });
   renderer.setSize(renderTarget.offsetWidth, renderTarget.offsetHeight);
   renderTarget.appendChild(renderer.domElement);
 
-  /**
-   * Set lights
-   */
   const setLights = (() => {
     scene.add(new THREE.AmbientLight(0xffffff, 0.33));
 
@@ -114,13 +118,18 @@ export function createScene() {
   /**
    * Set interaction
    */
+
+  const plane = createPlane(loader, renderTargetRatio);
+  const decals = setDecals(scene, loader);
+
   const interaction = setInteraction(
     scene,
     camera,
-    renderer,
     renderTarget,
     renderTargetRatio,
-    loader
+    loader,
+    plane,
+    decals
   );
   scene.add(interaction.plane.mesh);
   scene.add(interaction.plane.logoDecal);
@@ -142,6 +151,26 @@ export function createScene() {
     renderer.setAnimationLoop(null);
   }
 
+  /*
+   *
+   */
+
+  function saveAsImage() {
+    let link = document.createElement("a");
+    link.download = "nengastudio.png";
+
+    console.log(
+      renderer.domElement.toBlob(function (blob) {
+        console.log(blob);
+      })
+    );
+
+    renderer.domElement.toBlob(function (blob) {
+      link.href = URL.createObjectURL(blob);
+      link.click();
+    }, "image/png");
+  }
+
   function onResize() {
     camera.camera.aspect = renderTarget.offsetWidth / renderTarget.offsetHeight;
     camera.camera.updateProjectionMatrix();
@@ -153,6 +182,8 @@ export function createScene() {
   return {
     start,
     stop,
+    renderer,
+    saveAsImage,
     onResize,
   };
 }

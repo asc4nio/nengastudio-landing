@@ -2,8 +2,8 @@ import { CONFIG } from "./threeConfig.js";
 
 import * as THREE from "three";
 
-import { setDecals } from "./decals.js";
-import { createPlane } from "./denim.js";
+// import { setDecals } from "./decals.js";
+// import { createPlane } from "./denim.js";
 
 import { toggleControlsVisibility } from "./threeUI.js";
 
@@ -21,16 +21,17 @@ window.pointerState = {
 export function setInteraction(
   scene,
   camera,
-  renderer,
   renderTarget,
   renderTargetRatio,
-  loader
+  loader,
+  plane,
+  decals
 ) {
   console.debug("setInteraction()");
   const raycaster = new THREE.Raycaster();
 
-  const plane = createPlane(loader, renderTargetRatio);
-  const decals = setDecals(scene, loader);
+  // const plane = createPlane(loader, renderTargetRatio);
+  // const decals = setDecals(scene, loader);
 
   /**
    * Set pointer

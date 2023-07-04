@@ -38,7 +38,7 @@ export function setDomControls(renderer, decals) {
    * save button
    */
   document.getElementById("save-button").addEventListener("click", () => {
-    saveAsImage(renderer);
+    window.scene.saveAsImage();
   });
 
   /**
@@ -116,12 +116,12 @@ const updateColorButtonClass = (_target) => {
 
 /***************************************************************************** */
 
-function saveAsImage(renderer) {
-  let link = document.createElement("a");
-  link.download = "nengastudio.png";
+// function saveAsImage(renderer) {
+//   let link = document.createElement("a");
+//   link.download = "nengastudio.png";
 
-  renderer.domElement.toBlob(function (blob) {
-    link.href = URL.createObjectURL(blob);
-    link.click();
-  }, "image/png");
-}
+//   renderer.domElement.toBlob(function (blob) {
+//     link.href = URL.createObjectURL(blob);
+//     link.click();
+//   }, "image/png");
+// }
